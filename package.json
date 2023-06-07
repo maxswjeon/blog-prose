@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prisma": "dotenv -c $NODE_ENV -- prisma"
+    "prisma": "dotenv -c $NODE_ENV -- prisma",
+    "env": "$PWD/env.sh"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.342.0",
