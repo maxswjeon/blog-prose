@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ProseMirror a {
+  @apply underline text-gray-700;
+}
