@@ -28,13 +28,12 @@ export type Config = {
     apiKey: string;
     indexName: string;
   };
-  auth: {};
 };
 
 export const defaultConfig = {
   metadata: {
-    name: "Prose CMS",
-    description: "A simple CMS with great editing experience",
+    name: "Blog",
+    description: "A blog",
   },
   image: {
     driver: {
@@ -42,10 +41,4 @@ export const defaultConfig = {
       basePath: "data",
     },
   },
-  algolia: {
-    appId: "MN252XX0LM",
-    apiKey: "3562f426024687a630f97a0053a37b55",
-    indexName: "prose-cms",
-  },
-  auth: {},
 } satisfies Config;

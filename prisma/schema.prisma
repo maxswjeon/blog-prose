@@ -10,26 +10,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       String @id @default(uuid()) @db.Uuid
-  name     String
-  username String @unique
-  password String
-  posts    Post[]
-}
-
 model Post {
   id          String    @id @default(uuid()) @db.Uuid
   title       String
   description String
   content     String
   slug        String?   @unique
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  String?   @db.Uuid
+  tags        Tag[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now()) @updatedAt
   deletedAt   DateTime?
   publishedAt DateTime?
-  author      User      @relation(fields: [authorId], references: [id])
-  authorId    String    @db.Uuid
+}
+
+model Category {
+  id          String     @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+  parent      Category?  @relation("CategoryHierachy", fields: [parentId], references: [id])
+  parentId    String?    @db.Uuid
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now()) @updatedAt
+  deletedAt   DateTime?
+  posts       Post[]
+  children    Category[] @relation("CategoryHierachy")
+}
+
+model Tag {
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  deletedAt DateTime?
+  posts     Post[]
 }
 
 model Config {

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import authOptions from "lib/auth";
+import { getConfig } from "lib/config";
 import { prisma } from "lib/prisma";
 
 import Header from "app/(admin)/Header";
@@ -25,12 +26,7 @@ export default async function AdminPostPage({ searchParams }: Props) {
     redirect(`${process.env.BASE_URL}/admin/login`);
   }
 
-  const config = await prisma.config.findFirst({
-    orderBy: {
-      id: "desc",
-    },
-    take: 1,
-  });
+  const config = await getConfig();
 
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
   const search = searchParams?.search ? searchParams.search : "";

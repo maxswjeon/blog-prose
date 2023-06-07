@@ -21,11 +21,6 @@ export default async function AdminDraftPage() {
       title: "",
       description: "",
       content: "[]",
-      author: {
-        connect: {
-          id: session.user.id,
-        },
-      },
     },
   });
 

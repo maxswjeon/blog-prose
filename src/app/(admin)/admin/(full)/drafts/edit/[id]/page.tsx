@@ -6,6 +6,7 @@ import authOptions from "lib/auth";
 import { prisma } from "lib/prisma";
 
 import Header from "app/(admin)/Header";
+import { getConfig } from "lib/config";
 import Editor from "./Editor";
 import Providers from "./Providers";
 
@@ -24,12 +25,7 @@ export default async function AdminDraftPage({ params: { id } }: Props) {
     redirect(`${process.env.BASE_URL}/admin/login`);
   }
 
-  const config = await prisma.config.findFirst({
-    orderBy: {
-      id: "desc",
-    },
-    take: 1,
-  });
+  const config = await getConfig();
 
   const post = await prisma.post.findUnique({
     where: {

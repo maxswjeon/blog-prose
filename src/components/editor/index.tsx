@@ -10,10 +10,10 @@ import {
 
 import { defaultBlockSchema } from "@blocknote/core";
 
+import { BookmarkBlock, BookmarkCommand } from "./BookmarkBlock";
 import { CalloutBlock, CalloutCommand } from "./CalloutBlock";
 import { CodeBlock, CodeCommand } from "./CodeBlock";
 import { ImageBlock, ImageCommand } from "./ImageBlock";
-import { BookmarkBlock, BookmarkCommand } from "./BookmarkBlock";
 
 import useDynamicTextarea from "lib/useDynamicTextarea";
 
@@ -56,9 +56,8 @@ export default function Editor({
       BookmarkCommand,
     ],
     initialContent: JSON.parse(content || "[]"),
-    onEditorContentChange: async (editor) => {
+    onEditorContentChange: (editor) => {
       setContent(JSON.stringify(editor.topLevelBlocks));
-      console.log(await editor.blocksToHTML(editor.topLevelBlocks));
     },
     editable: !disabled,
   });

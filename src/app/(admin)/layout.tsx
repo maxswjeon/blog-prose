@@ -1,9 +1,9 @@
 import { PropsWithChildren } from "react";
 
+import { getConfig } from "lib/config";
+
 import "styles/globals.css";
 import "./styles.css";
-
-export const metadata = {};
 
 export default function AdminRootLayout({ children }: PropsWithChildren) {
   return (
@@ -19,4 +19,13 @@ export default function AdminRootLayout({ children }: PropsWithChildren) {
       <body className="w-full h-full overflow-auto">{children}</body>
     </html>
   );
+}
+
+export async function generateMetadata() {
+  const config = await getConfig();
+
+  return {
+    title: `Admin | ${config.metadata.name}`,
+    description: config.metadata.description,
+  };
 }
