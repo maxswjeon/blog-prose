@@ -38,30 +38,27 @@ export default function Editor({
   save,
   disabled,
 }: Props) {
-  const contentEditor = useBlockNote(
-    {
-      blockSchema: {
-        ...defaultBlockSchema,
-        image: ImageBlock,
-        codeblock: CodeBlock,
-        callout: CalloutBlock,
-        bookmark: BookmarkBlock,
-      },
-      slashCommands: [
-        ...defaultReactSlashMenuItems,
-        ImageCommand,
-        CodeCommand,
-        CalloutCommand,
-        BookmarkCommand,
-      ],
-      initialContent: JSON.parse(content || "[]"),
-      onEditorContentChange: (editor) => {
-        setContent(JSON.stringify(editor.topLevelBlocks));
-      },
-      editable: !disabled,
+  const contentEditor = useBlockNote({
+    blockSchema: {
+      ...defaultBlockSchema,
+      image: ImageBlock,
+      codeblock: CodeBlock,
+      callout: CalloutBlock,
+      bookmark: BookmarkBlock,
     },
-    [disabled]
-  );
+    slashCommands: [
+      ...defaultReactSlashMenuItems,
+      ImageCommand,
+      CodeCommand,
+      CalloutCommand,
+      BookmarkCommand,
+    ],
+    initialContent: JSON.parse(content || "[]"),
+    onEditorContentChange: (editor) => {
+      setContent(JSON.stringify(editor.topLevelBlocks));
+    },
+    editable: !disabled,
+  });
 
   const titleRef = useRef<HTMLTextAreaElement>(null);
   useDynamicTextarea(titleRef.current, title);
