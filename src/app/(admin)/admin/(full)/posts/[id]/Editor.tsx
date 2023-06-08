@@ -32,7 +32,7 @@ export default function Editor({ post }: Props) {
   return (
     <>
       <div className="w-full flex p-3 border-b border-gray-100">
-        <a href="/admin/drafts" className="flex items-center">
+        <a href="/admin/posts" className="flex items-center">
           <IconChevronLeft className="w-5 h-5 mr-2" />
           <p>Return to post list</p>
         </a>
