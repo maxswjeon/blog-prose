@@ -19,6 +19,9 @@ export default async function PostPage({ params: { slug } }: Props) {
     redirect(process.env.BASE_URL);
   }
 
+  console.log(post);
+  console.log(post.content);
+
   return (
     <div>
       <Editor {...post} />
