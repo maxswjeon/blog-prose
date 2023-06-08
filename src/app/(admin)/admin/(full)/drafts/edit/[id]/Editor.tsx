@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function Editor({ post }: Props) {
-  const { openPublishSheet, publishSheetOpen } = useContext(SheetContext);
+  const { openPublishSheet } = useContext(SheetContext);
 
   const [title, setTitle] = useState<string>(post.title);
   const [description, setDescription] = useState<string>(post.description);
@@ -79,7 +79,6 @@ export default function Editor({ post }: Props) {
         content={content}
         setContent={setContent}
         save={savePost}
-        disabled={publishSheetOpen}
       />
     </>
   );
