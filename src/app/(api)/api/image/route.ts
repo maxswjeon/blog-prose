@@ -86,8 +86,22 @@ export async function POST(req: Request) {
       name: "local",
       basePath: "data",
     });
+
+    return ResponseDTO.status(200).json({
+      result: true,
+      data: {
+        filename: `${uuid}.${extension}`,
+      },
+    });
   } else if (config.image.driver.name === "s3") {
     await uploadS3("images", uuid, extension, image, config.image.driver);
+
+    return ResponseDTO.status(200).json({
+      result: true,
+      data: {
+        filename: `${uuid}.${extension}`,
+      },
+    });
   } else {
     return ResponseDTO.status(501).json({
       result: false,
