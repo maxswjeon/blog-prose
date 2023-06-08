@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
+
+model Post {
+  id          String    @id @default(uuid()) @db.Uuid
+  title       String
+  description String
+  content     String
+  slug        String?   @unique
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  String?   @db.Uuid
+  tags        Tag[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  deletedAt   DateTime?
+  publishedAt DateTime?
+}
+
+model Category {
+  id          String     @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+  parent      Category?  @relation("CategoryHierachy", fields: [parentId], references: [id])
+  parentId    String?    @db.Uuid
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now()) @updatedAt
+  deletedAt   DateTime?
+  posts       Post[]
+  children    Category[] @relation("CategoryHierachy")
+}
+
+model Tag {
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  deletedAt DateTime?
+  posts     Post[]
+}
+
+model Config {
+  id        BigInt   @id @default(autoincrement())
+  version   BigInt
+  config    String
+  createdAt DateTime @default(now())
+}
