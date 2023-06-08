@@ -22,7 +22,8 @@ export default function Editor({ post }: Props) {
   const [content, setContent] = useState<string>(post.content);
 
   const savePost = async () => {
-    await axios.post(`/api/admin/posts?id=${post.id}`, {
+    await axios.post("/api/admin/posts", {
+      id: post.id,
       title,
       description,
       content,
