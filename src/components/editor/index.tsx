@@ -1,5 +1,3 @@
-"use client";
-
 import { useRef } from "react";
 
 import {
@@ -40,27 +38,30 @@ export default function Editor({
   save,
   disabled,
 }: Props) {
-  const contentEditor = useBlockNote({
-    blockSchema: {
-      ...defaultBlockSchema,
-      image: ImageBlock,
-      codeblock: CodeBlock,
-      callout: CalloutBlock,
-      bookmark: BookmarkBlock,
+  const contentEditor = useBlockNote(
+    {
+      blockSchema: {
+        ...defaultBlockSchema,
+        image: ImageBlock,
+        codeblock: CodeBlock,
+        callout: CalloutBlock,
+        bookmark: BookmarkBlock,
+      },
+      slashCommands: [
+        ...defaultReactSlashMenuItems,
+        ImageCommand,
+        CodeCommand,
+        CalloutCommand,
+        BookmarkCommand,
+      ],
+      initialContent: JSON.parse(content || "[]"),
+      onEditorContentChange: (editor) => {
+        setContent(JSON.stringify(editor.topLevelBlocks));
+      },
+      editable: !disabled,
     },
-    slashCommands: [
-      ...defaultReactSlashMenuItems,
-      ImageCommand,
-      CodeCommand,
-      CalloutCommand,
-      BookmarkCommand,
-    ],
-    initialContent: JSON.parse(content || "[]"),
-    onEditorContentChange: (editor) => {
-      setContent(JSON.stringify(editor.topLevelBlocks));
-    },
-    editable: !disabled,
-  });
+    [disabled]
+  );
 
   const titleRef = useRef<HTMLTextAreaElement>(null);
   useDynamicTextarea(titleRef.current, title);
@@ -93,7 +94,7 @@ export default function Editor({
         }}
         onBlur={save}
         value={description}
-        placeholder="Enter description here..."
+        placeholder={disabled ? "" : "Enter description here..."}
         className="w-full h-0 text-xl px-[50px] my-3 focus:outline-none break-keep whitespace-pre-wrap resize-none placeholder-[#ccc]"
       />
       <BlockNoteView editor={contentEditor} />

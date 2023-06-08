@@ -3,10 +3,10 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import authOptions from "lib/auth";
+import { getConfig } from "lib/config";
 import { prisma } from "lib/prisma";
 
 import Header from "app/(admin)/Header";
-import { getConfig } from "lib/config";
 import Editor from "./Editor";
 import Providers from "./Providers";
 

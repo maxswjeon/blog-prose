@@ -1,6 +1,8 @@
 import { prisma } from "lib/prisma";
 
 import IconCalendar from "assets/icons/icon_calendar.svg";
+import IconFolderOpen from "assets/icons/icon_folder-open.svg";
+import { getCategoryName } from "lib/categories";
 
 export default async function MainPage() {
   const posts = await prisma.post.findMany({
@@ -12,7 +14,12 @@ export default async function MainPage() {
     orderBy: {
       publishedAt: "desc",
     },
+    include: {
+      category: true,
+    },
   });
+
+  const categories = await prisma.category.findMany();
 
   return (
     <section className="">
@@ -26,10 +33,17 @@ export default async function MainPage() {
           <div className="flex mt-3">
             <div className="flex items-center">
               <IconCalendar className="w-3 h-3 fill-gray-400 mr-2" />
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-400 mr-3">
                 {post.createdAt.toLocaleDateString("en-US", {
                   dateStyle: "long",
+                  timeZone: "Asia/Seoul",
                 })}
+              </p>
+              <IconFolderOpen className="w-3 h-3 fill-gray-400 mr-2" />
+              <p className="text-sm text-gray-400">
+                {post.category
+                  ? getCategoryName(post.category, categories)
+                  : "Default"}
               </p>
             </div>
           </div>
