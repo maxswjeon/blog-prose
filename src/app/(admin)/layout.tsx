@@ -3,7 +3,6 @@ import { PropsWithChildren } from "react";
 import { getConfig } from "lib/config";
 
 import "styles/globals.css";
-import "./styles.css";
 
 export default function AdminRootLayout({ children }: PropsWithChildren) {
   return (

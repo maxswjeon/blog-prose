@@ -52,3 +52,5 @@ export default async function MainPage() {
     </section>
   );
 }
+
+export const revalidate = 60;

@@ -1,7 +1,8 @@
 import crypto from "crypto";
 
-import mime from "mime-types";
+import { headers } from "next/headers";
 
+import mime from "mime-types";
 import { getServerSession } from "next-auth";
 
 import authOptions from "lib/auth";
@@ -22,7 +23,7 @@ export async function POST(req: Request) {
     });
   }
 
-  const contentType = req.headers.get("Content-Type");
+  const contentType = headers().get("Content-Type");
 
   if (!contentType) {
     return ResponseDTO.status(400).json({
