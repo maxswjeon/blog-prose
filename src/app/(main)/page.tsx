@@ -21,8 +21,6 @@ export default async function MainPage() {
 
   const categories = await prisma.category.findMany();
 
-  console.log(posts);
-
   return (
     <section className="">
       {posts.map((post) => (
