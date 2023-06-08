@@ -62,7 +62,7 @@ export default function Editor({ post }: Props) {
         <div className="w-3 h-3" />
         <button
           type="button"
-          className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-md"
+          className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md"
           onClick={async () => {
             await savePost();
             openPublishSheet();

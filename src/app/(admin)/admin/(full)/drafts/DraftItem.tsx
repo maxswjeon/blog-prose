@@ -19,7 +19,10 @@ export default function DraftItem({ draft }: Props) {
       <p className="font-bold">{draft.title || "Untitled"}</p>
       <p className="text-sm text-gray-500">
         Created at{" "}
-        {draft.createdAt.toLocaleString("en-US", { dateStyle: "long" })}
+        {draft.createdAt.toLocaleString("en-US", {
+          dateStyle: "long",
+          timeZone: "Asia/Seoul",
+        })}
       </p>
     </div>
   );
