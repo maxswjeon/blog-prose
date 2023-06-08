@@ -39,20 +39,20 @@ export default function ClientLayout({ children, config }: Props) {
         <ul className="mt-12">
           <li className="py-3">
             <a href="/" className="flex items-center">
-              <IconHome className="hidden md:block w-5 h-5 mr-3 fill-gray-600" />
-              <p className="hidden md:block text-gray-600">Home</p>
+              <IconHome className="w-5 h-5 mr-3 fill-gray-600" />
+              <p className="text-gray-600">Home</p>
             </a>
           </li>
           <li className="py-3">
             <a href="/categories" className="flex items-center">
-              <IconList className="hidden md:block w-5 h-5 mr-3 fill-gray-600" />
-              <p className="hidden md:block text-gray-600">Categories</p>
+              <IconList className="w-5 h-5 mr-3 fill-gray-600" />
+              <p className="text-gray-600">Categories</p>
             </a>
           </li>
           <li className="py-3">
             <a href="/categories" className="flex items-center">
-              <IconTags className="hidden md:block w-5 h-5 mr-3 fill-gray-600" />
-              <p className="hidden md:block text-gray-600">Tags</p>
+              <IconTags className="w-5 h-5 mr-3 fill-gray-600" />
+              <p className="text-gray-600">Tags</p>
             </a>
           </li>
         </ul>
