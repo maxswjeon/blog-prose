@@ -70,7 +70,7 @@ export default function Editor({
   useDynamicTextarea(descriptionRef.current, description);
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto pb-12">
       <textarea
         ref={titleRef}
         onChange={(e) => setTitle(e.target.value)}
