@@ -9,19 +9,14 @@ import { Config, defaultConfig } from "types/config";
 import Form from "./Form";
 
 export default async function AdminLoginPage() {
-  console.log("getServerSession Before");
   const session = await getServerSession(authOptions);
-  console.log("getServerSession After");
 
   if (session) {
     redirect("/admin");
   }
 
   const noUser = !process.env.USER_ID || !process.env.USER_PASSWORD;
-
-  console.log("getConfig Before");
   const config = await getConfig();
-  console.log("getConfig After");
 
   return (
     <main className="w-full max-w-sm m-3 mx-auto p-6 rounded-xl shadow-xl shrink-0">
