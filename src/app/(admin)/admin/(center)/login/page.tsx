@@ -3,12 +3,15 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import authOptions from "lib/auth";
+import { getConfig } from "lib/config";
 import { prisma } from "lib/prisma";
 import { Config, defaultConfig } from "types/config";
 import Form from "./Form";
 
 export default async function AdminLoginPage() {
+  console.log("getServerSession Before");
   const session = await getServerSession(authOptions);
+  console.log("getServerSession After");
 
   if (session) {
     redirect("/admin");
@@ -16,16 +19,9 @@ export default async function AdminLoginPage() {
 
   const noUser = !process.env.USER_ID || !process.env.USER_PASSWORD;
 
-  const configRecord = await prisma.config.findFirst({
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: 1,
-  });
-
-  const config = configRecord
-    ? (JSON.parse(configRecord.config) as Config)
-    : defaultConfig;
+  console.log("getConfig Before");
+  const config = await getConfig();
+  console.log("getConfig After");
 
   return (
     <main className="w-full max-w-sm m-3 mx-auto p-6 rounded-xl shadow-xl shrink-0">
