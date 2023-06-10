@@ -28,5 +28,3 @@ export async function generateMetadata() {
     description: config.metadata.description,
   };
 }
-
-export const runtime = "edge";
